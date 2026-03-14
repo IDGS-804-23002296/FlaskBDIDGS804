@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block container %}
+<div class="pt-10 pb-20 max-w-4xl mx-auto px-4">
+    <h2 class="text-2xl font-bold mb-6 dark:text-white">Consulta de Inscripciones por Alumno</h2>
+    
+    <form method="GET" action="{{ url_for('alumnos.listaAlumnos') }}" class="mb-10 bg-gray-50 p-6 rounded-lg dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+        <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona un Alumno:</label>
+        <div class="flex gap-4">
+            <select name="id" id="id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                <option value="">-- Seleccione un alumno --</option>
+                {% for a in todos_los_alumnos %}
+                    <option value="{{ a.id }}" {% if alumno and alumno.id == a.id %}selected{% endif %}>
+                        {{ a.nombre }} {{ a.apellidos }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">
+                Consultar
+            </button>
+        </div>
+    </form>
+
+    {% if alumno %}
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800 border-b dark:border-gray-700">
+                    Cursos inscritos para: <span class="text-blue-600">{{ alumno.nombre }} {{ alumno.apellidos }}</span>
+                </caption>
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">Nombre del Curso</th>
+                        <th scope="col" class="px-6 py-3">Maestro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for curso in cursos %}
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{ curso.nombre }}</td>
+                        <td class="px-6 py-4">
+                            {% if curso.maestro %}
+                                {{ curso.maestro.nombre }} {{ curso.maestro.apellidos }}
+                            {% else %}
+                                <span class="text-red-400 italic">Sin maestro asignado</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="2" class="px-6 py-10 text-center text-gray-500 italic bg-white dark:bg-gray-800">
+                            Este alumno no tiene cursos inscritos actualmente.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

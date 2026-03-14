@@ -2,24 +2,46 @@
 {% block container %}
 {% import "_macros.html" as macro %}
 
-<form class="max-w-md mx-auto" method="POST">
-    {{ form.csrf_token }}
-    <div class="relative z-0 w-full mb-5 group">
-        {{macro.camposNuevos(form.nombre, class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer")}}
+<div class="max-w-lg mx-auto mt-10">
+    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+        
+        <div class="mb-8 text-center">
+            <h2 class="text-2xl font-bold text-gray-800">Registro de Maestro</h2>
+            <p class="text-gray-500 text-sm">Ingresa los datos del docente para darlo de alta en el sistema.</p>
+        </div>
+
+        <form method="POST" novalidate class="space-y-6">
+            {{ form.csrf_token }}
+
+            <div class="grid md:grid-cols-2 md:gap-6">
+                <div class="relative z-0 w-full mb-5 group">
+                    {{macro.camposNuevos(form.nombre, class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-brand peer")}}
+                </div>
+                <div class="relative z-0 w-full mb-5 group">
+                    {{macro.camposNuevos(form.apellidos, class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-brand peer")}}
+                </div>
+            </div>
+
+            <div class="relative z-0 w-full mb-5 group">
+                {{macro.camposNuevos(form.especialidad, class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-brand peer")}}
+            </div>
+
+            <div class="relative z-0 w-full mb-5 group">
+                {{macro.camposNuevos(form.email, class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-brand peer")}}
+            </div>
+
+            <div class="flex items-center justify-end space-x-4 pt-4">
+                <a href="{{ url_for('maestros.index') }}" 
+                   class="px-5 py-2.5 text-sm font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 transition-colors duration-200">
+                    Cancelar
+                </a>
+                <button type="submit" 
+                        class="text-white bg-brand hover:bg-brand-strong focus:ring-4 focus:outline-none focus:ring-brand-medium font-medium rounded-lg text-sm px-6 py-2.5 text-center shadow-md transition-all duration-200 transform hover:-translate-y-0.5">
+                    Agregar Maestro
+                </button>
+            </div>
+        </form>
     </div>
-    <div class="relative z-0 w-full mb-5 group">
-        {{macro.camposNuevos(form.apellidos, class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer")}}
-    </div>
-    <div class="relative z-0 w-full mb-5 group">
-        {{macro.camposNuevos(form.especialidad, class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer")}}
-    </div>
-  <div class="relative z-0 w-full mb-5 group">
-    {{macro.camposNuevos(form.email, class="block py-2.5 px-0 w-full text-sm text-heading bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer")}}
-  </div>
-  <button type="submit" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Agregar</button>
-  <a href="{{ url_for('maestros.index') }}" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none inline-block border border-transparent">
-    Cancelar
-</a>
-</form>
+</div>
 
 {% endblock %}

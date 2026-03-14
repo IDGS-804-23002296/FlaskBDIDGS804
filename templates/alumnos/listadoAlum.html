@@ -38,6 +38,12 @@
                 </th>
                 <th scope="col" class="px-6 py-3">
                     <div class="flex items-center">
+                        Cursos
+                       
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <div class="flex items-center">
                         Editar
                        
                     </div>
@@ -58,12 +64,21 @@
             </tr>
         </thead>
         <tbody>
-            {%for alum in alumno%}
+            {%for alum in alumnos%}
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200" >
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ alum.nombre }}</th>
                 <td class="px-6 py-4">{{ alum.apellidos }}</td>
                 <td class="px-6 py-4">{{ alum.telefono }}</td>
                 <td class="px-6 py-4">{{ alum.email }}</td>
+                <td class="px-6 py-4">
+                    {% for curso in alum.cursos %}
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                            {{ curso.nombre }}
+                        </span>
+                    {% else %}
+                        Sin cursos
+                    {% endfor %}
+                </td>
                 <td class="px-6 py-4 text-right">
                     <a href="modificar?id={{ alum.id }}" class="flex items-center
                     gap-2 bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">

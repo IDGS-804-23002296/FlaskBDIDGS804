@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block container %}
+<div class="pt-10 pb-20 max-w-4xl mx-auto px-4">
+    <h2 class="text-2xl font-bold mb-6 dark:text-white">Consulta de Alumnos por Curso</h2>
+    
+    <form method="GET" action="{{ url_for('alumnos.listaCursos') }}" class="mb-10 bg-gray-50 p-6 rounded-lg dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+        <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona un Curso:</label>
+        <div class="flex gap-4">
+            <select name="id" id="id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white">
+                <option value="">-- Seleccione un curso --</option>
+                {% for c in todos_los_cursos %}
+                    <option value="{{ c.id }}" {% if curso and curso.id == c.id %}selected{% endif %}>
+                        {{ c.nombre }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5">
+                Consultar
+            </button>
+        </div>
+    </form>
+
+    {% if curso %}
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800 border-b dark:border-gray-700">
+                    Alumnos inscritos en: <span class="text-purple-600">{{ curso.nombre }}</span>
+                </caption>
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">Nombre del Alumno</th>
+                        <th scope="col" class="px-6 py-3">Correo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for alum in alumnos %}
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{ alum.nombre }} {{ alum.apellidos }}</td>
+                        <td class="px-6 py-4">{{ alum.email }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="2" class="px-6 py-4 text-center">No hay alumnos inscritos en este curso.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block container %}
+
+<div class="py-20 px-4 max-w-4xl mx-auto text-center">
+    <div class="mb-20">
+        <h1 class="text-5xl font-extrabold text-gray-900 mb-6 tracking-tight">
+            Sistema <span class="text-blue-600">Escolar</span>
+        </h1>
+        <p class="text-xl text-gray-500 leading-relaxed">
+            Gestión integral de la comunidad académica. 
+            Utilice el menú de navegación superior para acceder a las secciones.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-gray-100 pt-16">
+        
+        <div class="space-y-4">
+            <h3 class="text-lg font-bold text-gray-800 uppercase tracking-widest">Alumnos</h3>
+            <p class="text-gray-500 text-sm leading-6">
+                Módulo para el registro de nuevos estudiantes, edición de datos personales y consulta de expedientes académicos.
+            </p>
+        </div>
+
+        <div class="space-y-4">
+            <h3 class="text-lg font-bold text-gray-800 uppercase tracking-widest">Cursos</h3>
+            <p class="text-gray-500 text-sm leading-6">
+                Consulta de la oferta académica vigente, asignación de materias y gestión de horarios escolares.
+            </p>
+        </div>
+
+        <div class="space-y-4">
+            <h3 class="text-lg font-bold text-gray-800 uppercase tracking-widest">Inscripciones</h3>
+            <p class="text-gray-500 text-sm leading-6">
+                Control de registros por asignatura y generación de reportes detallados de alumnos por grupo.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="mt-32 pt-8 border-t border-gray-50">
+        <p class="text-gray-400 text-xs tracking-widest uppercase">
+            © 2026 Control Escolar · IDGS804
+        </p>
+    </div>
+</div>
+
+{% endblock %}

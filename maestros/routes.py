@@ -10,15 +10,15 @@ from models import db
 from models import Maestros
 
 @maestros.route("/maestros", methods=['GET', 'POST'])
-
 def index():
     create_form = forms.MaestrosForm(request.form)
     maestros_list = Maestros.query.all()
     return render_template("maestros/listadoMaes.html", form=create_form, maestros=maestros_list)
 
 @maestros.route("/Maestro", methods=['GET', 'POST'])
-def Maestro():
+def listadoMaestro():
     create_form = forms.MaestrosForm(request.form)
+    
     if request.method == 'POST':
         maes = Maestros(
             nombre=create_form.nombre.data,
@@ -26,9 +26,14 @@ def Maestro():
             especialidad=create_form.especialidad.data,
             email=create_form.email.data
         )
-        db.session.add(maes)
-        db.session.commit()
-        return redirect(url_for('maestros.index'))
+        try:
+            db.session.add(maes)
+            db.session.commit()
+            return redirect(url_for('maestros.index'))
+        except Exception as e:
+            db.session.rollback()
+            flash("Error al guardar en la base de datos")
+            
     return render_template("maestros/Maestro.html", form=create_form)
 
 @maestros.route("/detallesMaestro", methods=['GET', 'POST'])
@@ -69,7 +74,7 @@ def modificarMaestro():
         else:
             return "Maestro no encontrado", 404
             
-    if request.method == 'POST':
+    if create_form.validate_on_submit():
         matricula = create_form.matricula.data
         maes1 = db.session.query(Maestros).filter(Maestros.matricula == matricula).first()
         
@@ -102,7 +107,7 @@ def eliminarMaestro():
         else:
             return "Maestro no encontrado", 404
             
-    if request.method == 'POST':
+    if create_form.validate_on_submit():
         matricula = create_form.matricula.data
         maes1 = db.session.query(Maestros).filter(Maestros.matricula == matricula).first()
         if maes1:

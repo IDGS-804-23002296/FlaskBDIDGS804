@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block container %}
+
+<div class="max-w-md mx-auto mt-20 mb-10">
+    <div class="relative bg-white border border-gray-200 rounded-3xl shadow-xl overflow-hidden">
+        
+        <div class="bg-brand h-24 w-full absolute top-0 left-0"></div>
+
+        <div class="relative pt-10 px-6 pb-8">
+            <div class="flex justify-center">
+                <div class="p-1 bg-white rounded-full shadow-lg">
+                    <img class="rounded-full w-28 h-28 border-4 border-white object-cover" 
+                         src="https://ui-avatars.com/api/?name={{ nombre }}+{{ apellidos }}&background=random&color=fff&size=128" 
+                         alt="Avatar de {{ nombre }}" />
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <h2 class="text-2xl font-black text-heading tracking-tight uppercase">
+                    {{ nombre }} {{ apellidos }}
+                </h2>
+                <span class="inline-block px-3 py-1 mt-2 text-xs font-bold bg-brand-light text-brand rounded-full uppercase tracking-widest">
+                    Perfil de Usuario
+                </span>
+            </div>
+
+            <div class="relative my-8 border-t-2 border-dashed border-gray-200">
+                <div class="absolute -left-9 -top-3 w-6 h-6 bg-neutral-primary-soft rounded-full border border-gray-200"></div>
+                <div class="absolute -right-9 -top-3 w-6 h-6 bg-neutral-primary-soft rounded-full border border-gray-200"></div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                    <div class="p-2 bg-white rounded-lg shadow-sm">
+                        <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="overflow-hidden">
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Correo Electrónico</p>
+                        <p class="text-sm font-bold text-heading truncate">{{ email }}</p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-blue-50 rounded-2xl border-l-4 border-blue-400">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-[10px] font-bold text-blue-600 uppercase">Estado de Cuenta</p>
+                            <p class="text-sm font-bold text-blue-800">Verificado</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] font-bold text-blue-600 uppercase">Rol</p>
+                            <p class="text-sm font-bold text-blue-800">Alumno</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <a href="{{ url_for('index') }}" 
+                   class="flex justify-center items-center w-full py-3.5 px-4 bg-gray-900 text-white font-bold rounded-xl hover:bg-orange-700 transition-all duration-300 shadow-lg group">
+                    <svg class="w-5 h-5 me-2 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 8 8 0 01-18 0z" />
+                    </svg>
+                    Volver a la lista
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="max-w-[90%] mx-auto h-2 bg-gray-200 rounded-b-full opacity-50"></div>
+</div>
+
+{% endblock %}
